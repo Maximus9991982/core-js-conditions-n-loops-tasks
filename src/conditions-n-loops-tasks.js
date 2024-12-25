@@ -21,8 +21,13 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+// function isPositive(/* number */) {
+//   throw new Error('Not implemented');
+// }
+
+function isPositive(number) {
+  if (number >= 0) return true;
+  return false;
 }
 
 /**
@@ -38,8 +43,14 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+// function getMaxNumber(/* a, b, c */) {
+//   throw new Error('Not implemented');
+// }
+
+function getMaxNumber(a, b, c) {
+  if (a > b && a > c) return a;
+  if (b > a && b > c) return b;
+  return c;
 }
 
 /**
@@ -60,8 +71,16 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+// function canQueenCaptureKing(/* queen, king */) {
+//   throw new Error('Not implemented');
+// }
+
+function canQueenCaptureKing(queen, king) {
+  const sameRow = queen.x === king.x;
+  const sameColumn = queen.y === king.y;
+  const sameDiagonal =
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y);
+  return sameRow || sameColumn || sameDiagonal;
 }
 
 /**
@@ -82,8 +101,19 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+// function isIsoscelesTriangle(/* a, b, c */) {
+//   throw new Error('Not implemented');
+// }
+// if (a + b >= c || b + c >= a || a + c >= b && a === b || a === c || b === c) return true;
+
+function isIsoscelesTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0) {
+    return false;
+  }
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    return false;
+  }
+  return a === b || a === c || b === c;
 }
 
 /**
@@ -100,8 +130,34 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+// function convertToRomanNumerals(/* num */) {
+//   throw new Error('Not implemented');
+// }
+
+function convertToRomanNumerals(num) {
+  let result = '';
+  let num1 = num;
+  while (num1 >= 10) {
+    result += 'X';
+    num1 -= 10;
+  }
+  if (num1 >= 9) {
+    result += 'IX';
+    num1 -= 9;
+  }
+  if (num1 >= 5) {
+    result += 'V';
+    num1 -= 5;
+  }
+  if (num1 >= 4) {
+    result += 'IV';
+    num1 -= 4;
+  }
+  while (num1 >= 1) {
+    result += 'I';
+    num1 -= 1;
+  }
+  return result;
 }
 
 /**
@@ -119,8 +175,72 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+// function convertNumberToString(/* numberStr */) {
+//   throw new Error('Not implemented');
+// }
+
+function convertNumberToString(numberStr) {
+  function digit2Word(digit) {
+    switch (digit) {
+      case '0':
+        return 'zero';
+      case '1':
+        return 'one';
+      case '2':
+        return 'two';
+      case '3':
+        return 'three';
+      case '4':
+        return 'four';
+      case '5':
+        return 'five';
+      case '6':
+        return 'six';
+      case '7':
+        return 'seven';
+      case '8':
+        return 'eight';
+      case '9':
+        return 'nine';
+      case '-':
+        return 'minus';
+      case '.':
+        return 'point';
+      case ',':
+        return 'point';
+      default:
+        return '';
+    }
+  }
+  let result = '';
+  let index = 0;
+  let first = true;
+  while (index < numberStr.length) {
+    if (!first) {
+      result += ' ';
+    }
+    first = false;
+    const char1 = numberStr[index];
+    if (
+      char1 === '0' ||
+      char1 === '1' ||
+      char1 === '2' ||
+      char1 === '3' ||
+      char1 === '4' ||
+      char1 === '5' ||
+      char1 === '6' ||
+      char1 === '7' ||
+      char1 === '8' ||
+      char1 === '9' ||
+      char1 === '-' ||
+      char1 === '.' ||
+      char1 === ','
+    ) {
+      result += digit2Word(char1);
+    }
+    index += 1;
+  }
+  return result;
 }
 
 /**
